@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.miprimerapp.DB.DB;
+import com.example.miprimerapp.Entity.User;
 
 import java.util.EventListener;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnLogin;
+
+    private Button btnRegistrar;
     private TextView txtUserName;
     private TextView txtPassword;
     private Intent panelRegistrar;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //TRAEMOS LOS BOTONES DEL FRONT
         btnLogin =  findViewById(R.id.btnLogin);
+        btnRegistrar = findViewById(R.id.btnRegistrar);
         txtPassword = findViewById(R.id.txtPassword);
         txtUserName = findViewById(R.id.txtUserName);
 
@@ -36,20 +40,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //DAMOS ACCION AL BOTON
         btnLogin.setOnClickListener(this);
-
+        btnRegistrar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+
+        if(view.getId() == R.id.btnRegistrar)
+            startActivity(this.panelRegistrar);
+        else
+            Login();
+    }
+    public boolean initSession(String userName, String password){
+        //INSTANCIAMOS LA BASE DE DATOS
+        DB DataBase = DB.getDB();
+
+        //BUSCAMOS EL USUARIO
+        for(User usuario: DataBase.getTable().values()){
+            if(usuario.getUserName().equals(userName) && usuario.getPassword().equals(password))
+                return true;
+        }
+        return false;
+    }
+
+    public void Login(){
         //COPIAMOS USUARIO Y CONTRASEÑA DEL FRONT
         String userName = this.txtUserName.getText().toString();
         String password = this.txtPassword.getText().toString();
 
         //SI LA CONTRASEÑA Y USUARIO SON CORRECTOS
-        if(initSession(userName,password))
+        if(initSession(userName,password)) {
             //NOS MOVEMOS DE ACTIVIDAD
-            startActivity(this.panelRegistrar);
-        else {
+            System.out.println(true);
+        }else {
             //MOSTRAMOS MENSAJE DE ERROR EN CREDENCIALES
             new AlertDialog.Builder(MainActivity.this) //INSTANCIAMOS UN MENSAJE
                     .setMessage("ERROR EN LAS CREDENCIALES")//SETEAMOS MENSAJE
@@ -64,18 +87,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .show();//LO MOSTRAMOS
             ;
         }
-
-    }
-    public boolean initSession(String userName, String password){
-        //INSTANCIAMOS LA BASE DE DATOS
-        DB DataBase = DB.getDB();
-
-        //BUSCAMOS EL USUARIO
-        for(Long i = 0L; i < DataBase.getTable().size();i++){
-            if(DataBase.getTable().get(i).getUserName().equals(userName) && DataBase.getTable().get(i).getPassword().equals(password)){
-                return true;
-            }
-        }
-        return false;
     }
 }
