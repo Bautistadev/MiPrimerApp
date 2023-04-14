@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MiPrimerApp</string>
+    <string name="txt_User_Name">User name</string>
+    <string name="txt_User_Password">Password</string>
+    <string name="btn_Init_session">Intro</string>
+    <string name="title_Login">LOGIN</string>
+    <string name="btn_New_User">Nuevo usuario</string>
+</resources>
