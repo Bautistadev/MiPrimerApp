@@ -3,15 +3,15 @@ package com.example.miprimerapp.Entity;
 public class User {
     private String userName;
     private String password;
-    private Persona persona;
+    private String email;
 
 
     public User(){}
 
-    public User(String userName, String password, Persona persona) {
+    public User(String userName, String password,String email) {
         this.userName = userName;
         this.password = password;
-        this.persona = persona;
+        this.email = email;
     }
 
     public void setUserName(String userName) {
@@ -22,8 +22,8 @@ public class User {
         this.password = password;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public String getUserName() {
@@ -34,16 +34,14 @@ public class User {
         return password;
     }
 
-    public Persona getPersona() {
-        return persona;
-    }
+    public String getEmail(){return email;}
 
     @Override
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", persona=" + persona +
+                ", email='"+ this.email+
                 '}';
     }
 }

@@ -1,10 +1,8 @@
 package com.example.miprimerapp.DB;
 
-import com.example.miprimerapp.Entity.Persona;
 import com.example.miprimerapp.Entity.User;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DB {
@@ -18,12 +16,7 @@ public class DB {
         this.listUser.put(0L,new User(
                 "admin",
                 "admin",
-                new Persona(
-                        "Bautista",
-                        "Basilio",
-                        "batubasilio@hotmail.com",
-                        43463078
-                )
+                "batubasilio@hotmail.com"
         ));
     }
 
