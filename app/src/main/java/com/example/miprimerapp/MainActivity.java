@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.miprimerapp.DB.DB;
+import com.example.miprimerapp.DB.UserDB;
 import com.example.miprimerapp.Entity.User;
 
 import java.util.EventListener;
@@ -51,25 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else
             Login();
     }
-    public boolean initSession(String userName, String password){
-        //INSTANCIAMOS LA BASE DE DATOS
-        DB DataBase = DB.getDB();
-
-        //BUSCAMOS EL USUARIO
-        for(User usuario: DataBase.getTable().values()){
-            if(usuario.getUserName().equals(userName) && usuario.getPassword().equals(password))
-                return true;
-        }
-        return false;
-    }
-
     public void Login(){
         //COPIAMOS USUARIO Y CONTRASEÑA DEL FRONT
         String userName = this.txtUserName.getText().toString();
         String password = this.txtPassword.getText().toString();
 
         //SI LA CONTRASEÑA Y USUARIO SON CORRECTOS
-        if(initSession(userName,password)) {
+        if(new UserDB().existUser(userName,password)) {
             //NOS MOVEMOS DE ACTIVIDAD
             System.out.println(true);
         }else {
