@@ -13,12 +13,15 @@ import android.widget.TextView;
 
 import com.example.miprimerapp.DB.DB;
 import com.example.miprimerapp.DB.UserDB;
+import com.example.miprimerapp.Entity.Message;
 import com.example.miprimerapp.Entity.User;
 
 import java.util.EventListener;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public static boolean NEWUSER = false;
 
     private Button btnLogin;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        messageNewUser();
 
         //TRAEMOS LOS BOTONES DEL FRONT
         btnLogin =  findViewById(R.id.btnLogin);
@@ -54,27 +59,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void Login(){
         //COPIAMOS USUARIO Y CONTRASEÑA DEL FRONT
-        String userName = this.txtUserName.getText().toString();
+        String userName = this.txtUserName.getText().toString().trim();
         String password = this.txtPassword.getText().toString();
 
         //SI LA CONTRASEÑA Y USUARIO SON CORRECTOS
-        if(new UserDB().existUser(userName,password)) {
-            //NOS MOVEMOS DE ACTIVIDAD
-            System.out.println(true);
-        }else {
-            //MOSTRAMOS MENSAJE DE ERROR EN CREDENCIALES
-            new AlertDialog.Builder(MainActivity.this) //INSTANCIAMOS UN MENSAJE
-                    .setMessage("ERROR EN LAS CREDENCIALES")//SETEAMOS MENSAJE
-                    .setCancelable(false)//EL MENSAJE NO PUEDE SER CANCELABLE
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() { //CREAMOS EL BOTON "OK"
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel(); //SALIMOS DEL MENSAJE
-                        }
-                    })
-                    .create()//CREAMOS EL MENSAJE
-                    .show();//LO MOSTRAMOS
-            ;
+        if(new UserDB().existUser(userName,password))
+            System.out.println(true);   //NOS MOVEMOS DE ACTIVIDAD
+        else
+            new Message(MainActivity.this,"ERROR, REVISE SUS CREDENCILALES !!").show(); //MOSTRAMOS MENSAJE DE ERROR
+    }
+
+    //MENSAJE QUE SOLO SE MUESTRA LUEGO DE CREAR UN NUEVO USUARIO DE FORMA EXITOSA
+    public void messageNewUser(){
+        if(NEWUSER) {
+            new Message(MainActivity.this, "USUARIO REGISTRADO CON EXITO !!").show();
+            NEWUSER = false;
         }
     }
 }
