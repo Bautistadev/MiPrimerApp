@@ -40,6 +40,7 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
 
         this.btnRegistrar.setOnClickListener(this);
 
+
     }
     @Override
     public void onClick(View view) {

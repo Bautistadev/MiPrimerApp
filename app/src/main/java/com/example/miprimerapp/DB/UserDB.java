@@ -40,4 +40,12 @@ public class UserDB {
         return false;
     }
 
+    public User getUserDb(String userName,String password){
+        for(User usuario: dataBase.values()){
+            if(usuario.getUserName().equals(userName) && usuario.getPassword().equals(password))
+                return usuario;
+        }
+        return null;
+    }
+
 }

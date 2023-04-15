@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MiPrimerApp"
         tools:targetApi="31">
         <activity
+            android:name=".MenuPrincipal"
+            android:exported="false" />
+        <activity
             android:name=".Registrar"
             android:exported="false" />
         <activity

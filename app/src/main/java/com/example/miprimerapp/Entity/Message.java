@@ -17,4 +17,6 @@ public class Message extends AlertDialog.Builder implements  DialogInterface.OnC
     public void onClick(DialogInterface dialogInterface, int i) {
         dialogInterface.cancel();
     }
+
+
 }
