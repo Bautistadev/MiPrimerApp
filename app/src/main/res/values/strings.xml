@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Login</string>
-    <string name="txt_User_Name">User name</string>
-    <string name="txt_User_Password">Password</string>
+    <string name="txt_User_Name">🙎‍♂ Nombre de usuario</string>
+    <string name="txt_User_Password">🔒 Contraseña</string>
     <string name="btn_Init_session">ACCEDER</string>
     <string name="title_Login">LOGIN</string>
     <string name="btn_New_User">REGISTRASE</string>
